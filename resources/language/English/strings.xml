@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+    <!-- Operator -->
+	<string id="32000">Select your telecom operator</string>
+	<string id="32001">AKTA</string>
+	<string id="32002">Canal S</string>
+	<string id="32003">HBO GO Vip/Club Romania</string>
+	<string id="32004">INES</string>
+	<string id="32005">INTERSAT</string>
+	<string id="32006">Metropolitan</string>
+	<string id="32007">MITnet</string>
+	<string id="32008">NextGen Communications</string>
+	<string id="32009">Orange Romania</string>
+	<string id="32010">RCS RDS</string>
+	<string id="32011">Telekom Romania</string>
+	<string id="32012">Telekom Romania Business</string>
+	<string id="32013">TV SAT 2002</string>
+	<string id="32014">UPC Romania</string>
+	<string id="32015">Vodafone</string>
+	<string id="32016">Vodafone Romania 4GTV+</string>
+	<string id="32017">Voucher HBOGO</string>
+
+    <!-- Account -->
+    <string id="32040">Account</string>
+    <string id="32041">Operator</string>
+    <string id="32042">Username</string>
+    <string id="32043">Password</string>
+    <!-- Settings -->
+    <string id="32050">Subtitles</string>
+    <string id="32051">Activate subtitle loading by this addon</string>
+    <string id="32052">Language</string>
+    <string id="32053">Select subtitle language</string>
+    <string id="32054">Romanian</string>
+    <string id="32055">English</string>
+</strings>

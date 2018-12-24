@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<addon id="plugin.video.hbogoro" name="HBO GO România" version="0.1.2" provider-name="sile70000">
+  <requires>
+    <import addon="script.module.requests" version="2.12.4"/>
+    <import addon="xbmc.python" version="2.25.0"/>
+    <import addon="inputstream.adaptive" version="2.1.0"/>
+    <import addon="script.module.inputstreamhelper" version="0.3.3"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="ro">HBO GO România</summary>
+    <description lang="ro">Plugin pentru HBO GO România</description>
+    <disclaimer lang="ro">Acesta nu este un plugin oficial! Dacă aveți o aplicație oficială pe platforma dvs., utilizați-o pentru actualizări. Toate drepturile rezervate de HBO® Europe.</disclaimer>
+    <summary lang="en">HBO GO Romania</summary>
+    <description lang="en">Plugin for HBO GO Romania</description>
+    <disclaimer lang="en">This is not an official plug-in! If an official app is available for your platform, use it instead of this plugin. All rights in the content are reserved by HBO® Europe.</disclaimer>
+    <language>ro</language>
+    <platform>all</platform>
+	<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+    <forum></forum>
+    <website>https://github.com/sile70000/plugin.video.hbogoro</website>
+    <news>Modified from bulgarian, hungarian and polish plugins. Thanks to billsuxx, c0d34fun and RESU OBH.</news>
+    <assets>
+     <icon>resources/icon.png</icon>
+     <fanart>resources/fanart.jpg</fanart>
+     <screenshot>resources/screenshot-01.jpg</screenshot>
+     <screenshot>resources/screenshot-02.jpg</screenshot>
+     <screenshot>resources/screenshot-03.jpg</screenshot>
+     <screenshot>resources/screenshot-04.jpg</screenshot>
+    </assets>
+  </extension>
+</addon>
