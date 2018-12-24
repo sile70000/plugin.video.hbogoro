@@ -11,4 +11,8 @@
         <setting label="32051" type="bool" id="se" default="true"/>
 	    <setting label="32052" type="enum" id="language" lvalues="32053|32054|32055" default="32053"/>/>
 	</category>
+	<!-- List and plot language -->
+	<category label="32060">
+	    <setting label="32061" type="enum" id="HBOlanguage" lvalues="32062|32063|32064" default="32062"/>/>
+	</category>
 </settings>

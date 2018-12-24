@@ -28,6 +28,8 @@ MUA = 'Dalvik/2.1.0 (Linux; U; Android 8.0.0; Nexus 5X Build/OPP3.170518.006)'
 
 se = __settings__.getSetting('se')
 language = __settings__.getSetting('language')
+HBOlanguage = __settings__.getSetting('HBOlanguage')
+
 if language == '0':
 	lang = 'English'
 	Code = 'ENG'
@@ -40,6 +42,22 @@ elif language == '2':
 	lang = 'English'
 	Code = 'ENG'
 	srtsubs_path = xbmc.translatePath('special://temp/hbogo.English.Forced.srt')
+	
+if HBOlanguage == '0':
+	HBOlang = 'English'
+	HBOCode = 'ENG'
+	FavString='Favorites'
+	SearchString='Search for movies, episodes ...'
+elif HBOlanguage == '1':
+	HBOlang = 'Romanian'
+	HBOCode = 'RON'
+	FavString='Favorite'
+	SearchString='Căutare filme, seriale ...'
+elif HBOlanguage == '2':
+	HBOlang = 'English'
+	HBOCode = 'ENG'
+	FavString='Favorites'
+	SearchString='Search for movies, episodes ...'
 	
 
 md = xbmc.translatePath(__Addon.getAddonInfo('path') + "/resources/media/")
@@ -144,7 +162,7 @@ def SILENTREGISTER():
 def GETFAVORITEGROUP():
 	global FavoritesGroupId
 
-	req = urllib2.Request('https://roapi.hbogo.eu/v7/Settings/json/RON/COMP', None, loggedin_headers)
+	req = urllib2.Request('https://roapi.hbogo.eu/v7/Settings/json/'+HBOCode+'/COMP', None, loggedin_headers)
 
 	opener = urllib2.build_opener()
 	f = opener.open(req)
@@ -233,15 +251,15 @@ def LOGIN():
 def CATEGORIES():
 	global FavoritesGroupId
 
-	addDir('Căutare filme, seriale ...','search','',4,md+'DefaultAddonsSearch.png')
+	addDir(SearchString,'search','',4,md+'DefaultAddonsSearch.png')
 
 	if (FavoritesGroupId == ""):
 		GETFAVORITEGROUP()
 
 	if (FavoritesGroupId != ""):
-		addDir('Favorite','https://roapi.hbogo.eu/v7/CustomerGroup/json/RON/COMP/'+FavoritesGroupId+'/-/-/-/1000/-/-/false','',1,md+'FavoritesFolder.png')
+		addDir(FavString,'https://roapi.hbogo.eu/v7/CustomerGroup/json/'+HBOCode+'/COMP/'+FavoritesGroupId+'/-/-/-/1000/-/-/false','',1,md+'FavoritesFolder.png')
 
-	req = urllib2.Request('http://roapi.hbogo.eu/v7/Groups/json/RON/ANMO/0/True', None, loggedin_headers)
+	req = urllib2.Request('http://roapi.hbogo.eu/v7/Groups/json/'+HBOCode+'/ANMO/0/True', None, loggedin_headers)
 	opener = urllib2.build_opener()
 	f = opener.open(req)
 	jsonrsp = json.loads(f.read())
@@ -271,7 +289,7 @@ def CATEGORIES():
 			for Container in range(0, len(jsonrsp2['Container'])):
 				addDir(jsonrsp2['Container'][Container]['Name'].encode('utf-8', 'ignore'),jsonrsp2['Container'][Container]['ObjectUrl'],'',1,md+'DefaultFolder.png')
 	
-		
+		#addDir(jsonrsp['Items'][3]['Name'].encode('utf-8', 'ignore'),'https://roapi.hbogo.eu/v7/Group/json/RON/COMP/960fdc80-adc1-4e39-8da0-073a777414d8/0/0/0/0/0/0/True','',1,md+'DefaultFolder.png')
 # List
 def LIST(url):
 	global sessionId
@@ -528,7 +546,7 @@ def SEARCH():
 		else:
 			__settings__.setSetting('lastsearch', searchText)
 
-			req = urllib2.Request('https://roapi.hbogo.eu/v7/Search/Json/RON/ANMO/'+searchText.decode('utf-8', 'ignore').encode('utf-8', 'ignore')+'/0/0/0/0/0/3', None, loggedin_headers)
+			req = urllib2.Request('https://roapi.hbogo.eu/v7/Search/Json/'+HBOCode+'/ANMO/'+searchText.decode('utf-8', 'ignore').encode('utf-8', 'ignore')+'/0/0/0/0/0/3', None, loggedin_headers)
 			opener = urllib2.build_opener()
 			f = opener.open(req)
 			jsonrsp = json.loads(f.read())

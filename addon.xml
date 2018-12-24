@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<addon id="plugin.video.hbogoro" name="HBO GO România" version="0.1.2" provider-name="sile70000">
+<addon id="plugin.video.hbogoro" name="HBO GO România" version="0.1.3" provider-name="sile70000">
   <requires>
     <import addon="script.module.requests" version="2.12.4"/>
     <import addon="xbmc.python" version="2.25.0"/>
@@ -18,7 +18,7 @@
     <disclaimer lang="en">This is not an official plug-in! If an official app is available for your platform, use it instead of this plugin. All rights in the content are reserved by HBO® Europe.</disclaimer>
     <language>ro</language>
     <platform>all</platform>
-    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+	<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
     <forum></forum>
     <website>https://github.com/sile70000/plugin.video.hbogoro</website>
     <news>Modified from bulgarian, hungarian and polish plugins. Thanks to billsuxx, c0d34fun and RESU OBH.</news>

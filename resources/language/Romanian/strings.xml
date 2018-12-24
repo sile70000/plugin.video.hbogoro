@@ -32,4 +32,10 @@
     <string id="32053">Selectează limba subtitrării</string>
     <string id="32054">Română</string>
     <string id="32055">Engleză</string>
+	<!-- List and plot language -->
+    <string id="32060">Limbă HBO</string>
+    <string id="32061">Limbă pentru meniuri și informații HBO</string>
+	<string id="32062">Selectează limba</string>
+    <string id="32063">Română</string>
+    <string id="32064">Engleză</string>
 </strings>

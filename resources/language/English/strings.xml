@@ -32,4 +32,10 @@
     <string id="32053">Select subtitle language</string>
     <string id="32054">Romanian</string>
     <string id="32055">English</string>
+	<!-- List and plot language -->
+    <string id="32060">HBO language</string>
+    <string id="32061">List and plot language</string>
+	<string id="32062">Select HBO language</string>
+    <string id="32063">Romanian</string>
+    <string id="32064">English</string>
 </strings>
