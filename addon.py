@@ -48,17 +48,19 @@ if HBOlanguage == '0':
 	HBOCode = 'ENG'
 	FavString='Favorites'
 	SearchString='Search for movies, episodes ...'
+	EpisodeString=' Episode '
 elif HBOlanguage == '1':
 	HBOlang = 'Romanian'
 	HBOCode = 'RON'
 	FavString='Favorite'
 	SearchString='Căutare filme, seriale ...'
+	EpisodeString=' Episodul '
 elif HBOlanguage == '2':
 	HBOlang = 'English'
 	HBOCode = 'ENG'
 	FavString='Favorites'
 	SearchString='Search for movies, episodes ...'
-	
+	EpisodeString=' Episode '
 
 md = xbmc.translatePath(__Addon.getAddonInfo('path') + "/resources/media/")
 search_string = urllib.unquote_plus(__settings__.getSetting('lastsearch'))
@@ -350,7 +352,7 @@ def LIST(url):
 				secondGenre = jsonrsp['Container'][0]['Contents']['Items'][titles]['SecondaryGenre']
 				genre = [firstGenre.capitalize(), secondGenre.capitalize()]
 				date = jsonrsp['Container'][0]['Contents']['Items'][titles]['AvailabilityFrom']
-				addLink(jsonrsp['Container'][0]['Contents']['Items'][titles]['ObjectUrl'],plot,jsonrsp['Container'][0]['Contents']['Items'][titles]['AgeRating'],jsonrsp['Container'][0]['Contents']['Items'][titles]['ImdbRate'],jsonrsp['Container'][0]['Contents']['Items'][titles]['BackgroundUrl'],[jsonrsp['Container'][0]['Contents']['Items'][titles]['Cast'].split(', ')][0],jsonrsp['Container'][0]['Contents']['Items'][titles]['Director'],jsonrsp['Container'][0]['Contents']['Items'][titles]['Writer'],jsonrsp['Container'][0]['Contents']['Items'][titles]['Duration'],genre,jsonrsp['Container'][0]['Contents']['Items'][titles]['SeriesName'].encode('utf-8', 'ignore')+' S'+str(jsonrsp['Container'][0]['Contents']['Items'][titles]['SeasonIndex'])+' Episodul '+str(jsonrsp['Container'][0]['Contents']['Items'][titles]['Index']),jsonrsp['Container'][0]['Contents']['Items'][titles]['OriginalName'],jsonrsp['Container'][0]['Contents']['Items'][titles]['ProductionYear'],5,date,allowplay)
+				addLink(jsonrsp['Container'][0]['Contents']['Items'][titles]['ObjectUrl'],plot,jsonrsp['Container'][0]['Contents']['Items'][titles]['AgeRating'],jsonrsp['Container'][0]['Contents']['Items'][titles]['ImdbRate'],jsonrsp['Container'][0]['Contents']['Items'][titles]['BackgroundUrl'],[jsonrsp['Container'][0]['Contents']['Items'][titles]['Cast'].split(', ')][0],jsonrsp['Container'][0]['Contents']['Items'][titles]['Director'],jsonrsp['Container'][0]['Contents']['Items'][titles]['Writer'],jsonrsp['Container'][0]['Contents']['Items'][titles]['Duration'],genre,jsonrsp['Container'][0]['Contents']['Items'][titles]['SeriesName'].encode('utf-8', 'ignore')+' S'+str(jsonrsp['Container'][0]['Contents']['Items'][titles]['SeasonIndex'])+EpisodeString+str(jsonrsp['Container'][0]['Contents']['Items'][titles]['Index']),jsonrsp['Container'][0]['Contents']['Items'][titles]['OriginalName'],jsonrsp['Container'][0]['Contents']['Items'][titles]['ProductionYear'],5,date,allowplay)
 			else:
 				#Series
 				xbmcplugin.setContent(int(sys.argv[1]), 'season')
