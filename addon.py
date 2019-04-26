@@ -85,6 +85,12 @@ op_ids = [
 '92e30168-4ca6-4512-967d-b79e584a22b6', # Vodafone
 '6826b525-04dc-4bb9-ada5-0a8e80a9f55a', # Vodafone Romania 4GTV+
 'da5a4764-a001-4dac-8e52-59d0ae531a62', # Voucher HBOGO
+													
+												  
+																			 
+													  
+																 
+																 
 ]
 op_id = op_ids[int(operator)];
 
@@ -164,7 +170,7 @@ def SILENTREGISTER():
 def GETFAVORITEGROUP():
 	global FavoritesGroupId
 
-	req = urllib2.Request('https://roapi.hbogo.eu/v7/Settings/json/'+HBOCode+'/COMP', None, loggedin_headers)
+	req = urllib2.Request('https://roapi.hbogo.eu/v8/Settings/json/'+HBOCode+'/COMP', None, loggedin_headers)
 
 	opener = urllib2.build_opener()
 	f = opener.open(req)
@@ -217,14 +223,79 @@ def LOGIN():
 	}
 
     # todo: instead of gateway you can get back to bulgar's version, but at the moment it's okay the links have been removed from the site
+											
 	#if operator == '1':
 	#	url = 'https://api.ugw.hbogo.eu/v3.0/Authentication/ROU/JSON/RON/COMP'
 	#else:
 	#	url = 'https://rogwapi.hbogo.eu/v2.1/Authentication/json/RON/COMP'
 	
 	url = 'https://rogwapi.hbogo.eu/v2.1/Authentication/json/RON/COMP'
-	data = '{"Action":"L","AppLanguage":null,"ActivationCode":null,"AllowedContents":[],"AudioLanguage":null,"AutoPlayNext":false,"BirthYear":0,"CurrentDevice":{"AppLanguage":"","AutoPlayNext":false,"Brand":"Chromium","CreatedDate":"","DeletedDate":"","Id":"00000000-0000-0000-0000-000000000000","Individualization":"'+individualization+'",               "IsDeleted":false,"LastUsed":"","Modell":"62","Name":"","OSName":"Ubuntu","OSVersion":"undefined","Platform":"COMP","SWVersion":"2.4.2.4025.240","SubtitleSize":""},"CustomerCode":"","DebugMode":false,"DefaultSubtitleLanguage":null,"EmailAddress":"'+username+'","FirstName":"",           "Gender":0,"Id":"00000000-0000-0000-0000-000000000000","IsAnonymus":true,"IsPromo":false,"Language":"RON","LastName":"","Nick":"","NotificationChanges":0,"OperatorId":"'+op_id+'",                           "OperatorName":"","OperatorToken":"","ParentalControl":{"Active":false,"Password":"","Rating":0,"ReferenceId":"00000000-0000-0000-0000-000000000000"},"Password":"'+password+'","PromoCode":"","ReferenceId":"00000000-0000-0000-0000-000000000000","SecondaryEmailAddress":"","SecondarySpecificData":null,"ServiceCode":"","SubscribeForNewsletter":false,"SubscState":null,"SubtitleSize":"","TVPinCode":"","ZipCode":""}'
+	data_obj = {
+		"Action": "L",
+		"AppLanguage": None,
+		"ActivationCode": None,
+		"AllowedContents": [],
+		"AudioLanguage": None,
+		"AutoPlayNext": False,
+		"BirthYear": 1,
+		"CurrentDevice": {
+			"AppLanguage":"",
+			"AutoPlayNext": False,
+			"Brand": "Chromium",
+			"CreatedDate": "",
+			"DeletedDate": "",
+			"Id": "00000000-0000-0000-0000-000000000000",
+			"Individualization": individualization,
+			"IsDeleted": False,
+			"LastUsed": "",
+			"Modell": "62",
+			"Name": "",
+			"OSName": "Ubuntu",
+			"OSVersion": "undefined",
+			"Platform": "COMP",
+			"SWVersion": "2.4.2.4025.240",
+			"SubtitleSize": ""
+		},
+		"CustomerCode": "",
+		"DebugMode": False,
+		"DefaultSubtitleLanguage": None,
+		"EmailAddress": username,
+		"FirstName": "",
+		"Gender": 0,
+		"Id": "00000000-0000-0000-0000-000000000000",
+		"IsAnonymus": True,
+		"IsPromo": False,
+		"Language": HBOCode,
+		"LastName": "",
+		"Nick": "",
+		"NotificationChanges": 0,
+		"OperatorId": op_id,
+		"OperatorName": "",
+		"OperatorToken": "",
+		"ParentalControl": {
+			"Active": False,
+			"Password": "",
+			"Rating": 0,
+			"ReferenceId": "00000000-0000-0000-0000-000000000000"
+		},
+		"Password": password,
+		"PromoCode": "",
+		"ReferenceId": "00000000-0000-0000-0000-000000000000",
+		"SecondaryEmailAddress": "",
+		"SecondarySpecificData": None,
+		"ServiceCode": "",
+		"SubscribeForNewsletter": False,
+		"SubscState": None,
+		"SubtitleSize": "",
+		"TVPinCode": "",
+		"ZipCode": ""
+	}
+
+	data = json.dumps(data_obj)				
 	r = requests.post(url, headers=headers, data=data)
+
+
+
 	jsonrspl = json.loads(r.text)
 
 	try:
@@ -259,11 +330,12 @@ def CATEGORIES():
 		GETFAVORITEGROUP()
 
 	if (FavoritesGroupId != ""):
-		addDir(FavString,'https://roapi.hbogo.eu/v7/CustomerGroup/json/'+HBOCode+'/COMP/'+FavoritesGroupId+'/-/-/-/1000/-/-/false','',1,md+'FavoritesFolder.png')
+		addDir(FavString,'https://roapi.hbogo.eu/v8/CustomerGroup/json/'+HBOCode+'/COMP/'+FavoritesGroupId+'/-/-/-/1000/-/-/false','',1,md+'FavoritesFolder.png')
 
-	req = urllib2.Request('http://roapi.hbogo.eu/v7/Groups/json/'+HBOCode+'/ANMO/0/True', None, loggedin_headers)
+	req = urllib2.Request('http://roapi.hbogo.eu/v8/Groups/json/'+HBOCode+'/ANMO/0/True', None, loggedin_headers)
 	opener = urllib2.build_opener()
 	f = opener.open(req)
+	#xbmc.log('mesaj_sile_link '+'http://roapi.hbogo.eu/v8/Groups/json/'+HBOCode+'/ANMO/0/True', xbmc.LOGNOTICE)
 	jsonrsp = json.loads(f.read())
 
 	try:
@@ -291,7 +363,7 @@ def CATEGORIES():
 			for Container in range(0, len(jsonrsp2['Container'])):
 				addDir(jsonrsp2['Container'][Container]['Name'].encode('utf-8', 'ignore'),jsonrsp2['Container'][Container]['ObjectUrl'],'',1,md+'DefaultFolder.png')
 	
-		#addDir(jsonrsp['Items'][3]['Name'].encode('utf-8', 'ignore'),'https://roapi.hbogo.eu/v7/Group/json/RON/COMP/960fdc80-adc1-4e39-8da0-073a777414d8/0/0/0/0/0/0/True','',1,md+'DefaultFolder.png')
+		#addDir(jsonrsp['Items'][3]['Name'].encode('utf-8', 'ignore'),'https://roapi.hbogo.eu/v8/Group/json/RON/COMP/960fdc80-adc1-4e39-8da0-073a777414d8/0/0/0/0/0/0/True','',1,md+'DefaultFolder.png')
 # List
 def LIST(url):
 	global sessionId
@@ -344,7 +416,7 @@ def LIST(url):
 			elif jsonrsp['Container'][0]['Contents']['Items'][titles]['ContentType'] == 3:
 				#Episodes
 				xbmcplugin.setContent(int(sys.argv[1]), 'episode')
-				plot = jsonrsp['Container'][0]['Contents']['Items'][titles].get( 'Abstract', None )
+				plot = jsonrsp['Container'][0]['Contents']['Items'][titles].get( 'Description', None )
 				if plot is None:
 					plot = ''
 				plot.encode('utf-8', 'ignore')
@@ -405,7 +477,7 @@ def EPISODE(url):
 
 	for episode in range(0, len(jsonrsp['ChildContents']['Items'])):
 		# addLink(ou,plot,ar,imdb,bu,cast,director,writer,duration,genre,name,on,py,mode)
-		plot = jsonrsp['ChildContents']['Items'][episode].get( 'Abstract', None )
+		plot = jsonrsp['ChildContents']['Items'][episode].get( 'Description', None )
 		if plot is None:
 			plot = ''
 		plot.encode('utf-8', 'ignore')
@@ -436,7 +508,7 @@ def PLAY(url):
 			#http://roapi.hbogo.eu/player50.svc/Content/json/RON/COMP/
 			#http://roapi.hbogo.eu/player50.svc/Content/json/RON/APPLE/
 			#http://roapi.hbogo.eu/player50.svc/Content/json/RON/SONY/
-			req = urllib2.Request('http://roapi.hbogo.eu/v7/Content/json/RON/ANMO/'+cid, None, loggedin_headers)
+			req = urllib2.Request('http://roapi.hbogo.eu/v8/Content/json/RON/ANMO/'+cid, None, loggedin_headers)
 			req.add_header('User-Agent', MUA)
 			opener = urllib2.build_opener()
 			f = opener.open(req)
@@ -475,7 +547,7 @@ def PLAY(url):
 			sub = 'false'
 
 
-	purchase_payload = '<Purchase xmlns="go:v7:interop" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><AllowHighResolution>true</AllowHighResolution><ContentId>'+cid+'</ContentId><CustomerId>'+GOcustomerId+'</CustomerId><Individualization>'+individualization+'</Individualization><OperatorId>'+op_id+'</OperatorId><IsFree>false</IsFree><RequiredPlatform>COMP</RequiredPlatform><UseInteractivity>false</UseInteractivity></Purchase>'
+	purchase_payload = '<Purchase xmlns="go:v8:interop" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><AllowHighResolution>true</AllowHighResolution><ContentId>'+cid+'</ContentId><CustomerId>'+GOcustomerId+'</CustomerId><Individualization>'+individualization+'</Individualization><OperatorId>'+op_id+'</OperatorId><IsFree>false</IsFree><RequiredPlatform>COMP</RequiredPlatform><UseInteractivity>false</UseInteractivity></Purchase>'
 
 	purchase_headers = {
 		'Accept': 'application/json, text/javascript, */*; q=0.01',
@@ -494,7 +566,7 @@ def PLAY(url):
 		'User-Agent': UA
 		}
 
-	req = urllib2.Request('https://roapi.hbogo.eu/v7/Purchase/Json/RON/COMP', purchase_payload, purchase_headers)
+	req = urllib2.Request('https://roapi.hbogo.eu/v8/Purchase/Json/RON/COMP', purchase_payload, purchase_headers)
 	opener = urllib2.build_opener()
 	f = opener.open(req)
 	jsonrspp = json.loads(f.read())
@@ -548,7 +620,7 @@ def SEARCH():
 		else:
 			__settings__.setSetting('lastsearch', searchText)
 
-			req = urllib2.Request('https://roapi.hbogo.eu/v7/Search/Json/'+HBOCode+'/ANMO/'+searchText.decode('utf-8', 'ignore').encode('utf-8', 'ignore')+'/0/0/0/0/0/3', None, loggedin_headers)
+			req = urllib2.Request('https://roapi.hbogo.eu/v8/Search/Json/'+HBOCode+'/ANMO/'+searchText.decode('utf-8', 'ignore').encode('utf-8', 'ignore')+'/0/0/0/0/0/3', None, loggedin_headers)
 			opener = urllib2.build_opener()
 			f = opener.open(req)
 			jsonrsp = json.loads(f.read())
